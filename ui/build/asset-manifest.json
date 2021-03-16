@@ -1,0 +1,28 @@
+{
+  "files": {
+    "main.css": "/static/css/main.9b027405.chunk.css",
+    "main.js": "/static/js/main.8c1dae07.chunk.js",
+    "main.js.map": "/static/js/main.8c1dae07.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.f2b6c5dd.js",
+    "runtime-main.js.map": "/static/js/runtime-main.f2b6c5dd.js.map",
+    "static/css/2.46a74cdd.chunk.css": "/static/css/2.46a74cdd.chunk.css",
+    "static/js/2.dd913a85.chunk.js": "/static/js/2.dd913a85.chunk.js",
+    "static/js/2.dd913a85.chunk.js.map": "/static/js/2.dd913a85.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.e75c93a1f408f469d2a625df012388b1.js": "/precache-manifest.e75c93a1f408f469d2a625df012388b1.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/2.46a74cdd.chunk.css.map": "/static/css/2.46a74cdd.chunk.css.map",
+    "static/css/main.9b027405.chunk.css.map": "/static/css/main.9b027405.chunk.css.map",
+    "static/js/2.dd913a85.chunk.js.LICENSE.txt": "/static/js/2.dd913a85.chunk.js.LICENSE.txt",
+    "static/media/play.svg": "/static/media/play.10e0b0c6.svg",
+    "static/media/react.svg": "/static/media/react.ee7cd8ed.svg",
+    "static/media/scala.svg": "/static/media/scala.4d198e38.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.f2b6c5dd.js",
+    "static/css/2.46a74cdd.chunk.css",
+    "static/js/2.dd913a85.chunk.js",
+    "static/css/main.9b027405.chunk.css",
+    "static/js/main.8c1dae07.chunk.js"
+  ]
+}
