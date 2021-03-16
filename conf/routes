@@ -5,22 +5,8 @@
 # Serve index page from public directory
 GET     /                           controllers.FrontendController.index()
 
-# An example route (Prefix all API routes with apiPrefix defined in application.conf)
-#GET     /api/summary                controllers.HomeController.appSummary
-
-
-#GET     /api/searchData/:datetimeFrom&:datetimeUntil            controllers.HomeController.searchData(datetimeFrom: String, datetimeUntil: String)
-
-#GET     /api/searchData/search                controllers.HomeController.searchData
-
-# Serve static assets under public directory
-#GET     /*file                      controllers.FrontendController.assetOrDefault(file)
-
-
-#+nocsrf
 GET     /api/get_status             controllers.HomeController.getStatus
 
-#+nocsrf
 GET     /api/get_size               controllers.HomeController.getSize
 
 #+nocsrf

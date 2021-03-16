@@ -20,8 +20,6 @@ case class LogDataLine(datetime: String = "2021-01-01", message: String = "succe
 
 case class Histogram(datetime: String, counts: Int)
 
-//case class RequestObject(datetimeFrom: String, datetimeUntil: String, phrase: String)
-
 object LogData {
 
   implicit val format: OFormat[LogData] = {
@@ -34,45 +32,6 @@ object LogData {
   }
 
   implicit val histogramFormat: OFormat[Histogram] = Json.format[Histogram]
-
-  //  implicit lazy val logDataWrites = Json.writes[LogData]
-  //  implicit val logDataFormat = Json.format[LogData]
-  //  implicit val logDataReads = Json.reads[RequestObject]
-  //  implicit val logDataWrites = Json.writes[RequestObject]
-
-  //  def writes(map: Map[String, Object]): JsValue =
-  //    Json.obj(
-  //      "datetime" -> map("datetime").asInstanceOf[String],
-  //      "message" -> map("message").asInstanceOf[String],
-  //      "highlightText" -> map("highlightText").asInstanceOf[ArrayBuffer]
-  //    )
-
-  //  def reads(jv: JsValue): JsResult[Map[String, Object]] =
-  //    JsSuccess(Map("datetime" -> (jv \ "datetime").as[String], "message" -> (jv \ "message").as[String]))
-
-  //  def writes(logData: LogData): JsValue = {
-  //    implicit val highlightText: Writes[HighlightText] = (
-  //      (JsPath \ "fromPosition").write[Int] and
-  //        (JsPath \ "toPosition").write[Int]
-  //      ) (HighlightText.unapply _)
-  //
-  //    implicit val logDataWrites: Writes[LogData] = (
-  //      (JsPath \ "datetime").write[String] and
-  //        (JsPath \ "message").write[String] and
-  //        (JsPath \ "highlightText").write[Seq[HighlightText]]
-  //      ) (LogData.unapply _)
-  //
-  ////    val logData = LogData(
-  ////      "2021-02-28",
-  ////      "born my son Abdullah",
-  ////      Seq(
-  ////        HighlightText(4, 7),
-  ////        HighlightText(9, 14)
-  ////      )
-  ////    )
-  //
-  //    Json.toJson(logData)
-  //  }
 
   def reads(jv: JsValue): JsResult[LogData] = {
     implicit val highlightText: Reads[HighlightText] = (
@@ -97,10 +56,7 @@ object LogData {
     * @return
     */
   def showLogCount: Int = {
-    val scalaFileContents = Source.fromFile("D:\\task\\eclipse\\pro\\scala-play-react-seed\\linuxLogFile.log").getLines()
-    //    println("Linse count: " + scalaFileContents.length)
-    //    for (line <- scalaFileContents)
-    //      println("Lines: " + line)
+    val scalaFileContents = Source.fromFile("D:\\task\\eclipse\\pro\\scala-play-react-logfileparser\\linuxLogFile.log").getLines()
 
     scalaFileContents.length
   }
@@ -110,9 +66,9 @@ object LogData {
     *
     * @return
     */
-  def getLogFileSize: String = {
+  def getLogFileSize(logFilePath: String): String = {
     import java.io.File
-    val logFile = new File("D:\\task\\eclipse\\pro\\scala-play-react-seed\\linuxLogFile.log")
+    val logFile = new File(logFilePath)
     logFile.length.toString()
   }
 
@@ -124,9 +80,9 @@ object LogData {
     * @param phrase
     * @return
     */
-  def getLogFileData(datetimeFrom: String, datetimeUntil: String, phrase: String): ArrayBuffer[LogData] = {
+  def getLogFileData(logFilePath: String, datetimeFrom: String, datetimeUntil: String, phrase: String): ArrayBuffer[LogData] = {
 
-    val logLines = Source.fromFile("D:\\task\\eclipse\\pro\\scala-play-react-seed\\linuxLogFile.log").getLines()
+    val logLines = Source.fromFile(logFilePath).getLines()
 
     val logDataLines = ArrayBuffer[LogDataLine]()
     for (logLine <- logLines) {
@@ -204,9 +160,9 @@ object LogData {
     * @param phrase
     * @return
     */
-  def getHistogramData(datetimeFrom: String, datetimeUntil: String, phrase: String): ArrayBuffer[Histogram] = {
+  def getHistogramData(logFilePath: String, datetimeFrom: String, datetimeUntil: String, phrase: String): ArrayBuffer[Histogram] = {
 
-    val logLines = Source.fromFile("D:\\task\\eclipse\\pro\\scala-play-react-seed\\linuxLogFile.log").getLines()
+    val logLines = Source.fromFile(logFilePath).getLines()
 
     val logDataLines = ArrayBuffer[LogDataLine]()
 

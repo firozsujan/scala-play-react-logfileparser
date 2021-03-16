@@ -1,4 +1,4 @@
-name := """scala-play-react-seed"""
+name := """scala-play-react-logfileparser"""
 
 version := "1.0-SNAPSHOT"
 
