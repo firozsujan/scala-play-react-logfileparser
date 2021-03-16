@@ -4,6 +4,7 @@ import axios from "axios";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import moment from "moment";
+import ToggleDisplay from 'react-toggle-display';
 
 
 export class SearchData extends Component {
@@ -13,7 +14,8 @@ export class SearchData extends Component {
     this.state = {
       logfiledata: [],
       datetimeFrom: '',
-      datetimeUntil: ''
+      datetimeUntil: '',
+      isTableNotEmpty: false
     }
 
   }
@@ -42,36 +44,41 @@ export class SearchData extends Component {
       datetimeUntil: moment(this.state.datetimeUntil).format('YYYY-MM-DD'),
       phrase: this.state.phrase
     };
-    // console.log("URL: " + '/api/searchData/' + moment(this.state.datetimeFrom).format('YYYY-MM-DD') + '&' + moment(this.state.datetimeUntil).format('YYYY-MM-DD'));
-    e.preventDefault();
-    // axios.get('/api/searchData/' + moment(this.state.datetimeFrom).format('YYYY-MM-DD') + '&' + moment(this.state.datetimeUntil).format('YYYY-MM-DD')).then(response => {
-    //   console.log("Success!!" + JSON.stringify(response.data));
-    //   this.setState({
-    //     logfiledata: response.data
-    //   });
-    // });
+   e.preventDefault();
+   console.log("Success!!" + JSON.stringify(data));
+   
+   console.log("Success!!" + JSON.stringify(data.phrase));
+
+    if(data.datetimeFrom !== "Invalid date" && data.datetimeUntil !== "Invalid date" && data.phrase !== "undefined"){
     axios.post('/api/data', data).then(response => {
       console.log("Success!!" + JSON.stringify(response.data));
       this.setState({
-        logfiledata: response.data.data
+        logfiledata: response.data.data,
+        isTableNotEmpty: true 
       });
     });
+  } else {
+    alert("Please fillup all fields")
+  }
   }
 
   render() {
-    return (<div>
-
+    return (
+    
+    <div>
+        <h4 className="col-sm-4">To search log please enter date from and date until and the Phrase. eg: ERROR, INFO etc.</h4>
+        <br/>
         <form onSubmit={this.onsubmit}>
           <div className="row hdr">
             <div className="col-sm-3 form-group">
               <DatePicker className="form-control"
-                          selected={this.state.datetimeFrom} placeholderText="Select Date" showPopperArrow={false}
+                          selected={this.state.datetimeFrom} placeholderText="Date From" showPopperArrow={false}
                           onChange={this.datetimeFrom}
               />
             </div>
             <div className="col-sm-3 form-group">
               <DatePicker className="form-control"
-                          selected={this.state.datetimeUntil} placeholderText="Select Date" showPopperArrow={false}
+                          selected={this.state.datetimeUntil} placeholderText="Date Until" showPopperArrow={false}
                           onChange={this.datetimeUntil}
               />
             </div>
@@ -84,7 +91,9 @@ export class SearchData extends Component {
             </div>
           </div>
         </form>
-        <table className="table">
+        
+        <ToggleDisplay show = {this.state.isTableNotEmpty} >
+        <table className="table" >
           <thead className="thead-dark">
           <tr>
             <th scope="col">DateTime</th>
@@ -101,7 +110,7 @@ export class SearchData extends Component {
           })
           }
           </tbody>
-        </table>
+        </table></ToggleDisplay>
       </div>
     )
   }
